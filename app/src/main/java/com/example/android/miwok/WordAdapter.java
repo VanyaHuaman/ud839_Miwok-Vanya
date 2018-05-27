@@ -1,18 +1,24 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
 
-    public WordAdapter(Context context, ArrayList<Word> words) {
+    private int mColorResourceID;
+
+
+    public WordAdapter(Context context, ArrayList<Word> words, int colorResourceID) {
         super(context, 0, words);
+        mColorResourceID = colorResourceID;
     }
 
 
@@ -40,14 +46,19 @@ public class WordAdapter extends ArrayAdapter<Word> {
         // set this text on the number TextView
         defaultTexView.setText(currentWord.getDefaultTranslation());
 
-        /*
-        // Find the ImageView in the list_item.xml layout with the ID list_item_icon
         ImageView iconView = (ImageView) listItemView.findViewById(R.id.iconImageView);
-        // Get the image resource ID from the current AndroidFlavor object and
-        // set the image to iconView
-        iconView.setImageResource(currentWord.getImageResourceId());
-        */
+        if(currentWord.hasImage()){
+            // Find the ImageView in the list_item.xml layout with the ID list_item_icon
+            // Get the image resource ID from the current AndroidFlavor object and
+            // set the image to iconView
+            iconView.setImageResource(currentWord.getImageID());
+        }else{
+            iconView.setVisibility(View.GONE);
+        }
 
+        View textContainer = listItemView.findViewById(R.id.listTextLayout);
+        int color = ContextCompat.getColor(getContext(), mColorResourceID);
+        textContainer.setBackgroundColor(color);
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView
         return listItemView;

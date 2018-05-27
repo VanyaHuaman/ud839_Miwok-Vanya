@@ -23,15 +23,19 @@ public class ColorsActivity extends AppCompatActivity {
         List<String> miwokWords = Arrays.asList("Wetetti", "Chokokki", "Takaakki", "Topoppi",
                 "Kululli", "Kelelli", "Topiisә", "Chiwiiṭә");
 
+        List<Integer> colorImages = Arrays.asList(R.drawable.color_red,R.drawable.color_green,
+                R.drawable.color_brown,R.drawable.color_gray,R.drawable.color_black,
+                R.drawable.color_white,R.drawable.color_dusty_yellow,R.drawable.color_mustard_yellow);
+
         ArrayList<Word> words = new ArrayList<Word>();
 
         for (int index = 0; index < defaultWords.size(); index++) {
-            words.add(new Word(defaultWords.get(index), miwokWords.get(index)));
+            words.add(new Word(defaultWords.get(index), miwokWords.get(index),colorImages.get(index)));
         }
 
         //Creates an Array Adapter
         //simple_list_item_1 is a predefined android R.layout
-        WordAdapter adapter = new WordAdapter(this, words);
+        WordAdapter adapter = new WordAdapter(this, words,R.color.category_colors);
 
         //Stores the List View in a variable
         ListView listView = (ListView) findViewById(R.id.list);

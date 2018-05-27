@@ -21,15 +21,21 @@ public class NumbersActivity extends AppCompatActivity {
         List<String> miwokWords = Arrays.asList("Lutti","Otiiko","Tolookosu","Oyyisa","Massokka","Temmokka",
                 "Kenekaku","Kawinta","Wo'e","Na'aacha");
 
+        List<Integer> numberImages = Arrays.asList(R.drawable.number_one,R.drawable.number_two,
+                R.drawable.number_three,R.drawable.number_four,R.drawable.number_five,
+                R.drawable.number_six,R.drawable.number_seven,R.drawable.number_eight,
+                R.drawable.number_nine,R.drawable.number_ten);
+
+
         ArrayList<Word> words = new ArrayList<Word>();
 
         for(int index=0;index<defaultWords.size();index++) {
-            words.add(new Word(defaultWords.get(index),miwokWords.get(index)));
+            words.add(new Word(defaultWords.get(index),miwokWords.get(index),numberImages.get(index)));
         }
 
         //Creates an Array Adapter
         //simple_list_item_1 is a predefined android R.layout
-        WordAdapter adapter = new WordAdapter(this, words);
+        WordAdapter adapter = new WordAdapter(this, words,R.color.category_numbers);
 
         //Stores the List View in a variable
         ListView listView = (ListView) findViewById(R.id.list);

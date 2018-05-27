@@ -23,6 +23,8 @@ public class PhrasesActivity extends AppCompatActivity {
         List<String> miwokWords = Arrays.asList("minto wuksus","tinnә oyaase'nә","oyaaset...",
                 "michәksәs?","kuchi achit","әәnәs'aa?","hәә’ әәnәm","әәnәm","yoowutis","әnni'nem");
 
+
+
         ArrayList<Word> words = new ArrayList<Word>();
 
         for(int index=0;index<defaultWords.size();index++) {
@@ -31,7 +33,7 @@ public class PhrasesActivity extends AppCompatActivity {
 
         //Creates an Array Adapter
         //simple_list_item_1 is a predefined android R.layout
-        WordAdapter adapter = new WordAdapter(this, words);
+        WordAdapter adapter = new WordAdapter(this, words,R.color.category_phrases);
 
         //Stores the List View in a variable
         ListView listView = (ListView) findViewById(R.id.list);
