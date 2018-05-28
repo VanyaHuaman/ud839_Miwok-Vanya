@@ -13,7 +13,9 @@ public class Word {
     private String mDefaultTranslation;
     private String mMiwokTranslation;
     private int mImageID = NO_IMAGE_PROVIDED;
+    private int mSoundID = NO_SOUND_PROVIDED;
     private static final int NO_IMAGE_PROVIDED = -1;
+    private static final int NO_SOUND_PROVIDED = -1;
 
     public Word(String defaultTranslation, String miwokTranslation){
         mDefaultTranslation = defaultTranslation;
@@ -27,6 +29,16 @@ public class Word {
         mMiwokTranslation = miwokTranslation;
         mImageID = imageID;
     }
+
+    //Constructor
+    public Word(String defaultTranslation, String miwokTranslation, int imageID, int soundID){
+        mDefaultTranslation = defaultTranslation;
+        mMiwokTranslation = miwokTranslation;
+        mImageID = imageID;
+        mSoundID = soundID;
+    }
+
+
 
     //Returns the Default translation String
     public String getDefaultTranslation(){
@@ -48,6 +60,13 @@ public class Word {
 
     public boolean hasImage(){
         return mImageID != NO_IMAGE_PROVIDED;
+    }
+
+    public int getSoundID(){
+        return mSoundID;
+    }
+    public boolean hasSound(){
+        return mSoundID != NO_SOUND_PROVIDED;
     }
 
 }

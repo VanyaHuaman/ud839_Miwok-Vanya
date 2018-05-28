@@ -1,10 +1,13 @@
 package com.example.android.miwok;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -13,6 +16,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FamilyActivity extends AppCompatActivity {
+
+    MediaPlayer mMediaPlayer;
+
+    ArrayList<Word> words = new ArrayList<Word>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +40,18 @@ public class FamilyActivity extends AppCompatActivity {
                 R.drawable.family_older_sister,R.drawable.family_younger_sister,
                 R.drawable.family_grandmother,R.drawable.family_grandfather);
 
-        ArrayList<Word> words = new ArrayList<Word>();
+        List<Integer> soundFiles = Arrays.asList(R.raw.family_father,R.raw.family_mother,
+                R.raw.family_son,R.raw.family_daughter,R.raw.family_older_brother,
+                R.raw.family_younger_brother,R.raw.family_older_sister,R.raw.family_younger_sister,
+                R.raw.family_grandmother,R.raw.family_grandfather);
+
+
+
+
 
         for(int index=0;index<defaultWords.size();index++) {
-            words.add(new Word(defaultWords.get(index),miwokWords.get(index),familyImages.get(index)));
+            words.add(new Word(defaultWords.get(index),miwokWords.get(index),familyImages.get(index),
+                    soundFiles.get(index)));
         }
 
         //Creates an Array Adapter
@@ -50,7 +65,16 @@ public class FamilyActivity extends AppCompatActivity {
         // english Words Array to the adapter
         listView.setAdapter(adapter);
 
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int currentSongID = words.get(position).getSoundID();
+                mMediaPlayer = MediaPlayer.create(FamilyActivity.this,currentSongID);
+                if(words.get(position).hasSound()) {
+                    mMediaPlayer.start();
+                }
+            }
+        });
 
 
     }

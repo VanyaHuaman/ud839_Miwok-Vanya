@@ -1,13 +1,19 @@
 package com.example.android.miwok;
 
+import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class NumbersActivity extends AppCompatActivity {
+    MediaPlayer mMediaPlayer;
+    ArrayList<Word> words = new ArrayList<Word>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +32,15 @@ public class NumbersActivity extends AppCompatActivity {
                 R.drawable.number_six,R.drawable.number_seven,R.drawable.number_eight,
                 R.drawable.number_nine,R.drawable.number_ten);
 
+        List<Integer> soundFiles = Arrays.asList(R.raw.number_one,R.raw.number_two,R.raw.number_three,
+                R.raw.number_four,R.raw.number_five,R.raw.number_six,R.raw.number_seven,
+                R.raw.number_eight,R.raw.number_nine,R.raw.number_ten);
 
-        ArrayList<Word> words = new ArrayList<Word>();
+
 
         for(int index=0;index<defaultWords.size();index++) {
-            words.add(new Word(defaultWords.get(index),miwokWords.get(index),numberImages.get(index)));
+            words.add(new Word(defaultWords.get(index),miwokWords.get(index),numberImages.get(index)
+                    ,soundFiles.get(index)));
         }
 
         //Creates an Array Adapter
@@ -44,6 +54,17 @@ public class NumbersActivity extends AppCompatActivity {
         // english Words Array to the adapter
         listView.setAdapter(adapter);
 
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int currentSongID = words.get(position).getSoundID();
+                mMediaPlayer = MediaPlayer.create(NumbersActivity.this,currentSongID);
+                if(words.get(position).hasSound()) {
+                    mMediaPlayer.start();
+                }
+            }
+        });
     }
 
 
