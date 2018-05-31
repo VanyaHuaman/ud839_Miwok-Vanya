@@ -30,11 +30,18 @@ public class Word {
         mImageID = imageID;
     }
 
+
+
     //Constructor
     public Word(String defaultTranslation, String miwokTranslation, int imageID, int soundID){
         mDefaultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
-        mImageID = imageID;
+        if(imageID==0){
+            mImageID=NO_IMAGE_PROVIDED;
+        }else {
+            mImageID = imageID;
+        }
+
         mSoundID = soundID;
     }
 
